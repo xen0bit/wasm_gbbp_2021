@@ -2,11 +2,15 @@
   "name": "@wasm/hello_world_c",
   "description": "",
   "version": "1.0.0",
+  "watch": {
+    "test": "main.wat"
+  },
   "scripts": {
-    "build": "npx -p wabt wat2wasm main.wat -o out/main.wasm",
-    "validate": "node helpers/validatewasm.js",
+    "build": "npx -p wabt wat2wasm main.wat -o out/main.wasm && npx -p wabt wat2wasm main.wat -o out/main.html && npx -p wabt wat2wasm main.wat -o out/main.zip",
+    "validate": "npx -p wabt wasm-validate out/main.wasm -v",
     "execute": "node helpers/runwasm.js",
-    "preinstall": "npx npm-force-resolutions"
+    "watch": "npm-watch test",
+    "test": "npm run build && npm run validate && npm run execute"
   },
   "resolutions": {
     "graceful-fs": "^4.2.4"
@@ -23,6 +27,7 @@
     "icon": "c-lang-file-icon"
   },
   "dependencies": {
+    "npm-watch": "^0.10.0",
     "wabt": "^1.0.23"
   }
 }
