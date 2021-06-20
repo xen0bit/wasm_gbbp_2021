@@ -1,12 +1,30 @@
 (module
   ;;imports must occur before all non-import definitions
   (import "console" "log" (func $log (param i32)))
+
   ;;Must grow memory or memory variable out of range: 0 (max 0)
   (memory $0 1)
+
+  ;;Emtpy function for exporting
+  (func $a
+    (i32.const 0)
+    return
+  )
+  ;;Use function export name to padd GBA game to offset(h) B0
+  (export "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00" (func $a))
+  (export "\00\00" (func $a))
+  ;;GBA 504 bytes as export
+  ;;(export "\30\31\96\00\00\00\00\00\00\00\00\00\00\F0\00\00\12\00\A0\E3\00\F0\29\E1\2C\D0\9F\E5\1F\00\A0\E3\00\F0\29\E1\24\D0\9F\E5\01\03\A0\E3\20\10\9F\E5\04\10\00\E5\01\10\A0\E3\08\12\80\E5\14\30\9F\E5\13\FF\2F\E1\10\00\9F\E5\10\FF\2F\E1\00\00\00\03\00\04\00\03\F4\00\00\08\54\01\00\08\10\01\00\08\00\48\2D\E9\34\C0\9F\E5\FF\E0\A0\E3\00\20\A0\E3\01\00\A0\E3\FF\EC\8E\E3\B0\10\DC\E1\0E\00\52\E3\00\48\BD\08\1E\FF\2F\01\0E\30\02\E0\01\20\82\E2\10\03\11\E1\10\33\A0\11\B0\30\CC\11\F6\FF\FF\EA\02\02\00\04\88\00\9F\E5\88\10\9F\E5\00\20\A0\E3\00\00\51\E1\01\00\00\0A\04\20\80\E4\FB\FF\FF\EA\74\00\9F\E5\74\10\9F\E5\74\20\9F\E5\00\00\52\E1\02\00\00\0A\04\30\91\E4\04\30\80\E4\FA\FF\FF\EA\01\03\A0\E3\03\10\A0\E3\00\C0\A0\E3\3E\2E\A0\E3\00\10\C0\E5\41\03\A0\E3\04\10\A0\E3\00\10\C0\E5\06\14\A0\E3\F0\00\5C\E3\1E\FF\2F\01\00\30\A0\E3\4B\0B\53\E3\03\00\00\0A\03\00\81\E0\1E\3E\83\E2\B0\20\C0\E1\F9\FF\FF\EA\02\10\81\E2\01\C0\8C\E2\F3\FF\FF\EA\00\0C\00\03\00\0C\00\03\00\0C\00\03\F8\01\00\08\00\0C\00\03" (func $a))
+  
+  ;;GBA 504 bytes as embedded func
+  (data (i32.const 16) "\30\31\96\00\00\00\00\00\00\00\00\00\00\F0\00\00\12\00\A0\E3\00\F0\29\E1\2C\D0\9F\E5\1F\00\A0\E3\00\F0\29\E1\24\D0\9F\E5\01\03\A0\E3\20\10\9F\E5\04\10\00\E5\01\10\A0\E3\08\12\80\E5\14\30\9F\E5\13\FF\2F\E1\10\00\9F\E5\10\FF\2F\E1\00\00\00\03\00\04\00\03\F4\00\00\08\54\01\00\08\10\01\00\08\00\48\2D\E9\34\C0\9F\E5\FF\E0\A0\E3\00\20\A0\E3\01\00\A0\E3\FF\EC\8E\E3\B0\10\DC\E1\0E\00\52\E3\00\48\BD\08\1E\FF\2F\01\0E\30\02\E0\01\20\82\E2\10\03\11\E1\10\33\A0\11\B0\30\CC\11\F6\FF\FF\EA\02\02\00\04\88\00\9F\E5\88\10\9F\E5\00\20\A0\E3\00\00\51\E1\01\00\00\0A\04\20\80\E4\FB\FF\FF\EA\74\00\9F\E5\74\10\9F\E5\74\20\9F\E5\00\00\52\E1\02\00\00\0A\04\30\91\E4\04\30\80\E4\FA\FF\FF\EA\01\03\A0\E3\03\10\A0\E3\00\C0\A0\E3\3E\2E\A0\E3\00\10\C0\E5\41\03\A0\E3\04\10\A0\E3\00\10\C0\E5\06\14\A0\E3\F0\00\5C\E3\1E\FF\2F\01\00\30\A0\E3\4B\0B\53\E3\03\00\00\0A\03\00\81\E0\1E\3E\83\E2\B0\20\C0\E1\F9\FF\FF\EA\02\10\81\E2\01\C0\8C\E2\F3\FF\FF\EA\00\0C\00\03\00\0C\00\03\00\0C\00\03\F8\01\00\08\00\0C\00\03")
+  
   ;;Store string in 64kb allocated block of memory
   ;;PKZIP
   ;;data const are appended to bottom of file
   (data (i32.const 0) "\50\4B\03\04\0A\00\00\00\00\00\03\4D\D4\52\00\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\61\50\4B\01\02\3F\00\0A\00\00\00\00\00\03\4D\D4\52\00\00\00\00\00\00\00\00\00\00\00\00\01\00\24\00\00\00\00\00\00\00\20\00\00\00\00\00\00\00\61\0A\00\20\00\00\00\00\00\01\00\18\00\87\7B\B8\C6\D9\65\D7\01\87\7B\B8\C6\D9\65\D7\01\87\7B\B8\C6\D9\65\D7\01\50\4B\05\06\00\00\00\00\01\00\01\00\53\00\00\00\1F\00\00\00\00\00")
+  ;;Padding test with const
+  ;;(data (i32.const 0) "\00\00\00\00\00")
   ;;Function that returns i32 0x2
   (func $r
     (i32.const 2)
@@ -14,7 +32,7 @@
     call $log
   )
   ;;Export function that is never called with a name that is valid HTML/JS
-  (export "<script>document.body.outerHTML='';const a=async function(){fetch(document.location).then(n=>n.arrayBuffer()).then(n=>WebAssembly.instantiate(n,{console:{log:function(n){console.log(n)}}})).then(n=>n.instance)};a();</script>" (func $r))
+  ;;(export "\51<html>hello</html>" (func $a))
   ;;Default WASM Instantiation
   (start $r)
   

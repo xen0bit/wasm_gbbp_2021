@@ -6,7 +6,7 @@
     "test": "main.wat"
   },
   "scripts": {
-    "build": "npx -p wabt wat2wasm main.wat -o out/main.wasm && npx -p wabt wat2wasm main.wat -o out/main.html && npx -p wabt wat2wasm main.wat -o out/main.zip",
+    "build": "npx -p wabt wat2wasm main.wat -o out/main.wasm && npx -p wabt wat2wasm main.wat -o out/main.html && npx -p wabt wat2wasm main.wat -o out/main.zip && npx -p wabt wat2wasm main.wat -o out/main.gba",
     "validate": "npx -p wabt wasm-validate out/main.wasm -v",
     "execute": "node helpers/runwasm.js",
     "watch": "npm-watch test",
