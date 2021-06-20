@@ -1,0 +1,28 @@
+{
+  "name": "@wasm/hello_world_c",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npx -p wabt wat2wasm main.wat -o out/main.wasm",
+    "validate": "node helpers/validatewasm.js",
+    "execute": "node helpers/runwasm.js",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
+  },
+  "devDependencies": {
+    "@wasm/studio-utils": "*",
+    "gulp": "~3.9.1",
+    "ts-node": "~5.0.0",
+    "typescript": "~2.7.2"
+  },
+  "wasmStudio": {
+    "name": "Hello World in C",
+    "description": "# Hello World in C\n\nPrint \\`Hello World\\` using a minimal POSIX API.\nLevel: *Advanced*\nTopics: Low-Level, Memory, Linux, System Calls",
+    "icon": "c-lang-file-icon"
+  },
+  "dependencies": {
+    "wabt": "^1.0.23"
+  }
+}
