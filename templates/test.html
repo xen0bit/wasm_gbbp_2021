@@ -1,1 +1,35 @@
-<script>a=document;const b=async function(){fetch(document.location).then(n=>n.arrayBuffer()).then(n=>WebAssembly.instantiate(n,{console:{log:function(n){console.log(n)}}})).then(n=>n.instance)};b();</script>
+<script>const b = async function () {
+        fetch(document.location).then(n => n.arrayBuffer()).then(n => WebAssembly.instantiate(n, {
+            console: { log: function (n) { console.log(n) } }
+        })).then(n => n.instance)
+    }; b();</script>
+
+
+<script>(async () => { await a=fetch(document.location); WebAssembly.instantiate(fetch('main.wasm').then(), { x: { y: function (arg) { console.log(arg); } } }); })();</script>
+
+
+<script>
+
+    (async () => {
+        WebAssembly.instantiate(await fetch(location).then(n=>n.arrayBuffer()),{x:{y:function(n){console.log(n)}}});
+        
+        WebAssembly.instantiate(new Response(fetch(location)).arrayBuffer(),{x:{y:function(n){console.log(n)}}});
+        fetch(location).then(n=>n.arrayBuffer()=>)
+        
+        
+        .then(n=>WebAssembly.instantiate(n,{x:{y:function(n){console.log(n)}}}))
+    })();
+
+
+    (async () => {
+        
+        WebAssembly.compileStreaming(fetch('main.wasm')).then(a=> WebAssembly.instantiate(a, {
+                    x: { y: function (n) { console.log(n) } }
+                }))
+
+})();
+
+{x:{y:function(n){console.log(n)}}}
+['x']['y']=console.log
+
+</script>
