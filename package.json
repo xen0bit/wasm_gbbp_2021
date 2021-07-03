@@ -9,11 +9,11 @@
     "build": "npx -p wabt wat2wasm main.wat -o out/main.wasm && npx -p wabt wat2wasm main.wat -o out/main.html && npx -p wabt wat2wasm main.wat -o out/main.7z && npx -p wabt wat2wasm main.wat -o out/main.gba",
     "validate": "npx -p wabt wasm-validate out/main.wasm -v",
     "execute": "node helpers/runwasm.js",
-    "wabt-execute": "npx -p wabt wasm-interp out/main.wasm",
+    "wabt-execute": "npx -p wabt wasm-interp out/main.wasm --host-print",
     "wasm2wat": "npx -p wabt wasm2wat out/main.wasm -o out/main.wat",
     "dissassemble": "npx -p wabt wat2wasm main.wat -v",
     "watch": "npm-watch WASM",
-    "WASM": "npm run build && npm run validate && npm run execute"
+    "WASM": "npm run build && npm run validate && npm run wabt-execute"
   },
   "resolutions": {
     "graceful-fs": "^4.2.4"
